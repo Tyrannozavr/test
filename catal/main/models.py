@@ -137,8 +137,8 @@ class TypeOfMotor(models.Model):
 class EngineVolume(models.Model):
     volume = models.FloatField(verbose_name='Объем двигателя')
 
-    # def __str__(self):
-    #     return self.volume
+    def __str__(self):
+        return self.volume
 
 # ГОДА ВЫПУСКА
 class YearRelease(models.Model):
@@ -156,7 +156,12 @@ class BrandAuto(models.Model):
 
 # МОДЕЛИ АВТО
 class ModelAuto(models.Model):
+    mark = models.ForeignKey('BrandAuto', null=True, on_delete=models.PROTECT)
     model = models.CharField(max_length=50, verbose_name='Модель')
+
+    def __str__(self):
+        return self.model
+    
 
 # КАТАЛИЗАТОР
 class Catalysts(models.Model):
