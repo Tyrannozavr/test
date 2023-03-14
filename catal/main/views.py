@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.http import HttpResponse, HttpResponseNotFound, Http404, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.views.generic.list import ListView
 # from django.views.generic.detail import DetailView
@@ -42,13 +42,13 @@ class PageCatalogMeta:
 
 
 
-
+from time import time
 # СТРАНИЦА - КАТАЛОГ
 class CatalogListView(PageCatalogMeta, ListView):
     model = Catalysts
     template_name = 'main/catalog.html'
     context = 'context'
-
+    extra_context = {'now': time()}
 # class CatalogView(PageCatalogMeta, View):
 
 #     def get(self, request):
@@ -177,3 +177,11 @@ def contacts(request):
 # СТРАНИЦА 404
 def pageNotFound(request, exception):
   return HttpResponseNotFound('<h1>Страница не найдена - 404</h1>')
+
+
+# брэнды для поиска
+def brand_list(request):
+    brands = BrandAuto.objects.all().values_list('brand')
+    brands = [i[0] for i in brands]
+    # print(brands, type(brands))
+    return JsonResponse({'list': brands})

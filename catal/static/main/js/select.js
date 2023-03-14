@@ -12,35 +12,54 @@ window.addEventListener('click', (e) => {
         document.querySelector('.searchInput1').classList.remove('focus')
     }
 })
-
-var array1 = [
-    "Custom Input",
-    "Mali",
-    "Vanuatu",
-    "Venezuela",
-    "Viet Nam",
-    "Virgin Islands, British",
-    "Virgin Islands, U.s.",
-    "Wallis and Futuna",
-    "Western Sahara",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe"
-];
+$.ajax('brands', {
+    dataType: 'json',
+    type: 'GET',
+    success: (res) => {
+        // console.log(res['list']);
+        // console.log(array1)
+        let array1 = res['list']
+        get_list(array1)
+    }
+})
+// var array1 = [
+//     "Custom Input",
+//     "Mali",
+//     "Vanuatu",
+//     "Venezuela",
+//     "Viet Nam",
+//     "Virgin Islands, British",
+//     "Virgin Islands, U.s.",
+//     "Wallis and Futuna",
+//     "Western Sahara",
+//     "Yemen",
+//     "Zambia",
+//     "Zimbabwe"
+// ];
 
 customInput1.addEventListener('click', () => {
+    console.log('hello');
     customInputContainer1.classList.toggle('show')
 })
 
-let array1Length = array1.length
+// let array1Length = array1.length
 
-for (let i = 0; i < array1Length; i++) {
-    let country = array1[i]
+// for (let i = 0; i < array1Length; i++) {
+//     let country = array1[i]
+//     const li = document.createElement("li");
+//     const countryName = document.createTextNode(country);
+//     li.appendChild(countryName);
+//     ul1.appendChild(li);
+// }
+function get_list(array) {
+    arrayLength = array.length
+for (let i = 0; i < arrayLength; i++) {
+    let country = array[i]
     const li = document.createElement("li");
     const countryName = document.createTextNode(country);
     li.appendChild(countryName);
     ul1.appendChild(li);
-}
+}}
 
 
 ul1.querySelectorAll('li').forEach(li => {

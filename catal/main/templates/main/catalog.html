@@ -21,7 +21,6 @@
             </div>
           </section>
         </div>
-
         <section class="cat">
           <div class="container">
             <!-- Фильтр -->
@@ -318,5 +317,6 @@
 {% endblock content %}
 
 {% block script %}
-  <script src="{% static 'main/js/select.js' %}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="{% static 'main/js/select.js' %}?{{ now }}"></script>
 {% endblock script %}

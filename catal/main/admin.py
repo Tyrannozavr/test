@@ -204,6 +204,15 @@ class CityAdmin(admin.ModelAdmin):
     get_image.short_description = 'Фото'
 
 
+@admin.register(BrandAuto)
+class BrandAutoAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(ModelAuto)
+class ModelAutoAdmin(admin.ModelAdmin):
+    pass
+
+
 
 admin.site.site_title = 'Администрирование сайта'
 admin.site.site_header = 'AUTOKAT_GROUP'
