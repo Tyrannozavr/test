@@ -1,0 +1,85 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+      <main class="main">
+        <!-- Хлебные крошки -->
+        <div class="head-wrapper">
+          <section class="head">
+            <div class="container">
+              <nav class="breadcrumbs">
+                <ul class="breadcrumbs__items">
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'home' %}">Главная</a>
+                  </li>
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'price' %}">Цены</a>
+                  </li>
+                </ul>
+              </nav>
+              <h1 class="head__title h1">{{header_h1.header_h1}}</h1>
+            </div>
+          </section>
+        </div>
+
+        <!-- Текст и таблица цен -->
+        <section class="price">
+          <div class="container">
+            <p class="table__subtitle">
+              Обновление цен <span>22 декабря 2023 года</span>
+            </p>
+            <div class="price__items">
+              <!-- Таблица -->
+              <div class="price__item">
+                <table class="price__table">
+                  <thead class="thead">
+                    <tr class="tr">
+                      <th class="th">Автомобиль</th>
+                      <th class="th">Цена, руб.</th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody">
+                    {% for p in pricetable %}
+                    <tr class="tr">
+                      <td class="td">{{p.auto}}</td>
+                      <td class="td">{{p.price}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Текст -->
+              <div class="price__item">
+                <div class="price__content">
+                  {{content.content|safe}}
+                </div>
+                <div class="price__form-wrap wrap">
+                  <h3 class="form__title">ЗАКАЖИТЕ ВЫЕЗД СПЕЦИАЛИСТА</h3>
+                  <p class="form__subtitle">
+                    Наш специалист приедет в удобное для вас место, оценит и
+                    купит катализатор
+                  </p>
+                  <form class="form__item" action="">
+                    <input
+                      class="form__input-name"
+                      type="text"
+                      placeholder="Имя"
+                    />
+                    <input
+                      class="form__input-phone"
+                      type="text"
+                      placeholder="+7 (___) ___-__-__"
+                    />
+                    <button class="form__btn">Отправить</button>
+                    <p class="form__text">
+                      Нажимая на кнопку, вы соглашаетесь c
+                      <a>политикой обработки персональных данных.</a>
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+{% endblock content %}

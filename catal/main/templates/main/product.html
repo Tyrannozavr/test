@@ -1,0 +1,228 @@
+{% load static %}
+{% extends 'main/base.html' %}
+
+{% block content %}
+      <main class="main">
+        <!-- Хлебные крошки -->
+        <div class="head-wrapper">
+          <section class="head">
+            <div class="container">
+              <nav class="breadcrumbs">
+                <ul class="breadcrumbs__items">
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="index.html">Главная</a>
+                  </li>
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="catalog.html">Каталог</a>
+                  </li>
+                </ul>
+              </nav>
+              <h1 class="head__title h1">
+                Катализатор Mersedes-Benz Vito 2003 (дизель, 3.2л)
+              </h1>
+            </div>
+          </section>
+        </div>
+  
+        <section class="product">
+          <div class="container">
+            <div class="product__wrapper">
+              <!-- Обертка для сладера -->
+              <div class="slider-wrapper">
+                <!-- Слайдер изображения ката -->
+                <div class="slider">
+                  <div class="swiper mySwiper2">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <img
+                          src="https://swiperjs.com/demos/images/nature-1.jpg"
+                        />
+                      </div>
+                      <div class="swiper-slide">
+                        <img
+                          src="https://swiperjs.com/demos/images/nature-2.jpg"
+                        />
+                      </div>
+                      <div class="swiper-slide">
+                        <img
+                          src="https://swiperjs.com/demos/images/nature-3.jpg"
+                        />
+                      </div>
+                      <div class="swiper-slide">
+                        <img
+                          src="https://swiperjs.com/demos/images/nature-4.jpg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper mySwiper" thumbsSlider="">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <img
+                          src="https://swiperjs.com/demos/images/nature-1.jpg"
+                        />
+                      </div>
+                      <div class="swiper-slide">
+                        <img
+                          src="https://swiperjs.com/demos/images/nature-2.jpg"
+                        />
+                      </div>
+                      <div class="swiper-slide">
+                        <img
+                          src="https://swiperjs.com/demos/images/nature-3.jpg"
+                        />
+                      </div>
+                      <div class="swiper-slide">
+                        <img
+                          src="https://swiperjs.com/demos/images/nature-4.jpg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <!-- Кнопка добавить фото -->
+                <div class="add-photo">
+                  <a class="add-photo__link" href="#"
+                    ><span class="add-photo__icon"></span>Загрузить фото
+                    катализатора</a
+                  >
+                </div>
+              </div>
+              <div class="product__inner">
+                <!-- Характеристики -->
+                <div class="specifications">
+                  <h3 class="specifications__title h3">Характеристики</h3>
+                  <table class="specifications__table">
+                    <tbody class="tbody">
+                      <tr class="tr tr-top">
+                        <td class="td td-top-left">Марка</td>
+                        <td class="td td-top-right">Mersedes-Benz</td>
+                      </tr>
+                      <tr class="tr">
+                        <td class="td">Модель</td>
+                        <td class="td">RIO</td>
+                      </tr>
+                      <tr class="tr">
+                        <td class="td">Год выпуска</td>
+                        <td class="td">2003</td>
+                      </tr>
+                      <tr class="tr">
+                        <td class="td">Страна</td>
+                        <td class="td">Германия</td>
+                      </tr>
+                      <tr class="tr">
+                        <td class="td">Тип двигателя</td>
+                        <td class="td">Бензиновый</td>
+                      </tr>
+                      <tr class="tr">
+                        <td class="td">Объем двигателя</td>
+                        <td class="td">3,2л турбо</td>
+                      </tr>
+                      <tr class="tr">
+                        <td class="td">Вид транспорта</td>
+                        <td class="td">Легковое авто</td>
+                      </tr>
+                      <tr class="tr">
+                        <td class="td-color">Масса</td>
+                        <td class="td-color">1235 гр</td>
+                      </tr>
+                      <tr class="tr">
+                        <td class="td-color">Pt (платина)</td>
+                        <td class="td-color">1,24 гр</td>
+                      </tr>
+                      <tr class="tr">
+                        <td class="td-color">Pd (палладий)</td>
+                        <td class="td-color">1.83 гр</td>
+                      </tr>
+                      <tr class="tr tr-bottom">
+                        <td class="td-color td-bottom-left">Rh (родий)</td>
+                        <td class="td-color td-bottom-right">0,325 гр</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+  
+                <!-- Цена и форма -->
+                <div class="product__item">
+                  <h3 class="product__item-title h3">Цена на 25.12.2022</h3>
+                  <!-- Цена товара -->
+                  <div class="product-price wrap">
+                    <p class="product-price__title">93 254,24 ₽/кг</p>
+                    <p class="product-price__text">
+                      Точная стоимость определяется после проведения
+                      спектрального анализа специалистом компании
+                      AUTOKAT GROUP
+                    </p>
+  
+                    <!-- Форма заявки на странице товара -->
+                    <form class="form__item" action="">
+                      <input
+                        class="form__input-name"
+                        type="text"
+                        placeholder="Имя"
+                      />
+                      <input
+                        class="form__input-phone"
+                        type="text"
+                        placeholder="+7 (___) ___-__-__"
+                      />
+                      <button class="form__btn">
+                        Заказать выезд специалиста
+                      </button>
+                      <p class="form__text">
+                      Нажимая на кнопку, вы соглашаетесь c
+                      <a>политикой обработки персональных данных.</a>
+                    </p>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- График изменения цены -->
+            <div class="chart">
+              <h2 class="chart__title h2">График изменения цены</h2>
+              <p class="chart__subtitle">
+                История изменения цены 01.01.2019-23.12.2022
+              </p>
+              <div class="chart__wrap wrap">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+  
+            <!-- Описание катализатора -->
+            <div class="content">
+              <h2 class="content__h2 h2">
+                Продать катализатор Mersedes-Benz Vito 2003
+              </h2>
+              <p class="content__text text">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
+                corporis, distinctio maxime saepe ratione vel tempora molestias
+                vitae reiciendis ea labore libero autem aliquid excepturi
+                praesentium et sint ipsum aperiam.
+              </p>
+              <p class="content__text text">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia
+                cum magnam, necessitatibus animi eius voluptates, laborum illo
+                assumenda laboriosam sint officia repudiandae ullam hic velit
+                optio sequi quo atque nostrum.
+              </p>
+              <p class="content__text text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
+                odio possimus id, aperiam adipisci amet qui maiores consectetur
+                eos temporibus veritatis accusantium, perspiciatis atque dolore
+                nesciunt praesentium et cumque illum?
+              </p>
+            </div>
+  
+            <!-- Сообщить о неточности -->
+            <div class="error">
+              <a class="error__link"><span>&#9888;</span>Сообщить о неточности</a>
+            </div>
+          </div>
+        </section>
+      </main>
+{% endblock content %}
+{% static 'main/js/swiper.js' %}
+{% static 'main/js/chart.js' %}

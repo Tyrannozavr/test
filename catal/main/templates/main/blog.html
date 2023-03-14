@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+      <main class="main">
+        <!-- Хлебные крошки -->
+        <div class="head-wrapper">
+          <section class="head">
+            <div class="container">
+              <nav class="breadcrumbs">
+                <ul class="breadcrumbs__items">
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'home' %}">Главная</a>
+                  </li>
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'blog' %}">Блог</a>
+                  </li>
+                </ul>
+              </nav>
+              <h1 class="head__title h1">{{ header_h1.header_h1 }}</h1>
+            </div>
+          </section>
+        </div>
+
+        <!-- Листинг новостей -->
+        <section class="news">
+          <div class="container">
+            <div class="news__listing">
+              <ul class="news__items">
+                {% for object in page_obj %}
+                <li class="news__item">
+                  <div class="news__top">
+                    <img class="news__image" src="{{object.image.url}}" alt="" />
+                    <a class="news__link" href="{{object.slug}}">
+                      <h4 class="news__title">
+                        {{object.header}}
+                      </h4>
+                    </a>
+                  </div>
+                  <div class="news__bottom">
+                    <span class="news__date">{{object.date|date:'d.m.y'}}</span>
+                    <span class="news__views">1254</span>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+
+              <ul class="news__pagination pagination">
+                {% if page_obj.has_previous %}
+                <li class="pagination__item">
+                  <a class="pagination__link" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+                </li>
+                {% endif %}
+
+                {% for p in page_obj.paginator.page_range %}
+                {% if page_obj.number == p %}
+                <li class="pagination__item">
+                  <span class="pagination__link pag-selected">{{p}}</span>
+                </li>
+                {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+
+                <li class="pagination__item">
+                  <a class="pagination__link" href="?page={{p}}">{{p}}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                <li class="pagination__item">
+                  <a class="pagination__link" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+{% endblock content %}

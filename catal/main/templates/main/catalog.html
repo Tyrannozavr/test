@@ -1,0 +1,322 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+      <main class="main">
+        <!-- Хлебные крошки -->
+        <div class="head-wrapper">
+          <section class="head">
+            <div class="container">
+              <nav class="breadcrumbs">
+                <ul class="breadcrumbs__items">
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'home' %}">Главная</a>
+                  </li>
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'catalog' %}">Каталог</a>
+                  </li>
+                </ul>
+              </nav>
+              <h1 class="head__title h1">{{ header_h1.header_h1 }}</h1>
+            </div>
+          </section>
+        </div>
+
+        <section class="cat">
+          <div class="container">
+            <!-- Фильтр -->
+            <div class="cat__head wrap">
+              <div class="cat__title">
+                <span class="cat__name">Фильтр</span>
+                <span class="cat__icon"></span>
+              </div>
+              <form class="filter" action="">
+                <div class="filter__item">
+                  <!-- Контейнер селекта 1 -->
+                  <div class="customInputContainer1 filter__brand">
+                    <div class="customInput1">
+                      <div class="selectedData1">Марка авто</div>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </div>
+                    <div class="options1">
+                      <div class="searchInput1">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input
+                          type="text"
+                          id="searchInput1"
+                          placeholder="Search"
+                        />
+                      </div>
+                      <ul class="ul1"></ul>
+                    </div>
+                  </div>
+
+                  <!-- Контейнер селекта 2 -->
+                  <div class="customInputContainer2">
+                    <div class="customInput2">
+                      <div class="selectedData2">Модель</div>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </div>
+                    <div class="options2">
+                      <div class="searchInput2">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input
+                          type="text"
+                          id="searchInput2"
+                          placeholder="Search"
+                        />
+                      </div>
+                      <ul class="ul2"></ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="filter__item">
+                  <!-- Контейнер селекта 3 -->
+                  <div class="customInputContainer3 filter__year">
+                    <div class="customInput3">
+                      <div class="selectedData3">Год выпуска</div>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </div>
+                    <div class="options3">
+                      <div class="searchInput3">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input
+                          type="text"
+                          id="searchInput3"
+                          placeholder="Search"
+                        />
+                      </div>
+                      <ul class="ul3"></ul>
+                    </div>
+                  </div>
+
+                  <!-- Контейнер селекта 4 -->
+                  <div class="customInputContainer4">
+                    <div class="customInput4">
+                      <div class="selectedData4">Тип двигателя</div>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </div>
+                    <div class="options4">
+                      <div class="searchInput4">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input
+                          type="text"
+                          id="searchInput4"
+                          placeholder="Search"
+                        />
+                      </div>
+                      <ul class="ul4"></ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="filter__item">
+                  <!-- Контейнер селекта 5 -->
+                  <div class="customInputContainer5 filter__motor">
+                    <div class="customInput5">
+                      <div class="selectedData5">Объем двигателя</div>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </div>
+                    <div class="options5">
+                      <div class="searchInput5">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input
+                          type="text"
+                          id="searchInput5"
+                          placeholder="Search"
+                        />
+                      </div>
+                      <ul class="ul5"></ul>
+                    </div>
+                  </div>
+
+                  <!-- Кнопки -->
+                  <div class="filter__buttons">
+                    <button class="filter__button-reset">Сбросить</button>
+                    <button class="filter__button-apply">Применить</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Листинг катализаторов -->
+            <div class="cat__body listing">
+              <ul class="listing__items">
+                <li class="listing__item wrap">
+                  <a class="listing__link" href="product.html"></a>
+                  <img class="listing__image" src="img/cat.jpg" alt="" />
+                  <div class="listing__head">
+                    <h4 class="listing__brand">Mersedes-Benz</h4>
+                    <p class="listing__model">Sprinter Classic</p>
+                  </div>
+                  <div class="listing__body">
+                    <p class="listing__year">2018</p>
+                    <div class="listing__parameters">
+                      <span class="listing__motor">дизель</span>
+                      <span class="listing__volume">3.2 турбо</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="listing__item wrap">
+                  <a class="listing__link" href="product.html"></a>
+                  <img class="listing__image" src="img/cat.jpg" alt="" />
+                  <div class="listing__head">
+                    <h4 class="listing__brand">Mersedes-Benz</h4>
+                    <p class="listing__model">Sprinter Classic</p>
+                  </div>
+                  <div class="listing__body">
+                    <p class="listing__year">2018</p>
+                    <div class="listing__parameters">
+                      <span class="listing__motor">дизель</span>
+                      <span class="listing__volume">3.2 турбо</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="listing__item wrap">
+                  <a class="listing__link" href="product.html"></a>
+                  <img class="listing__image" src="img/cat.jpg" alt="" />
+                  <div class="listing__head">
+                    <h4 class="listing__brand">Mersedes-Benz</h4>
+                    <p class="listing__model">Sprinter Classic</p>
+                  </div>
+                  <div class="listing__body">
+                    <p class="listing__year">2018</p>
+                    <div class="listing__parameters">
+                      <span class="listing__motor">дизель</span>
+                      <span class="listing__volume">3.2 турбо</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="listing__item wrap">
+                  <a class="listing__link" href="product.html"></a>
+                  <img class="listing__image" src="img/cat.jpg" alt="" />
+                  <div class="listing__head">
+                    <h4 class="listing__brand">Mersedes-Benz</h4>
+                    <p class="listing__model">Sprinter Classic</p>
+                  </div>
+                  <div class="listing__body">
+                    <p class="listing__year">2018</p>
+                    <div class="listing__parameters">
+                      <span class="listing__motor">дизель</span>
+                      <span class="listing__volume">3.2 турбо</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="listing__item wrap">
+                  <a class="listing__link" href="product.html"></a>
+                  <img class="listing__image" src="img/cat.jpg" alt="" />
+                  <div class="listing__head">
+                    <h4 class="listing__brand">Mersedes-Benz</h4>
+                    <p class="listing__model">Sprinter Classic</p>
+                  </div>
+                  <div class="listing__body">
+                    <p class="listing__year">2018</p>
+                    <div class="listing__parameters">
+                      <span class="listing__motor">дизель</span>
+                      <span class="listing__volume">3.2 турбо</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="listing__item wrap">
+                  <a class="listing__link" href="product.html"></a>
+                  <img class="listing__image" src="img/cat.jpg" alt="" />
+                  <div class="listing__head">
+                    <h4 class="listing__brand">Mersedes-Benz</h4>
+                    <p class="listing__model">Sprinter Classic</p>
+                  </div>
+                  <div class="listing__body">
+                    <p class="listing__year">2018</p>
+                    <div class="listing__parameters">
+                      <span class="listing__motor">дизель</span>
+                      <span class="listing__volume">3.2 турбо</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="listing__item wrap">
+                  <a class="listing__link" href="product.html"></a>
+                  <img class="listing__image" src="img/cat.jpg" alt="" />
+                  <div class="listing__head">
+                    <h4 class="listing__brand">Mersedes-Benz</h4>
+                    <p class="listing__model">Sprinter Classic</p>
+                  </div>
+                  <div class="listing__body">
+                    <p class="listing__year">2018</p>
+                    <div class="listing__parameters">
+                      <span class="listing__motor">дизель</span>
+                      <span class="listing__volume">3.2 турбо</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="listing__item wrap">
+                  <a class="listing__link" href="product.html"></a>
+                  <img class="listing__image" src="img/cat.jpg" alt="" />
+                  <div class="listing__head">
+                    <h4 class="listing__brand">Mersedes-Benz</h4>
+                    <p class="listing__model">Sprinter Classic</p>
+                  </div>
+                  <div class="listing__body">
+                    <p class="listing__year">2018</p>
+                    <div class="listing__parameters">
+                      <span class="listing__motor">дизель</span>
+                      <span class="listing__volume">3.2 турбо</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="listing__item wrap">
+                  <a class="listing__link" href="product.html"></a>
+                  <img class="listing__image" src="img/cat.jpg" alt="" />
+                  <div class="listing__head">
+                    <h4 class="listing__brand">Mersedes-Benz</h4>
+                    <p class="listing__model">Sprinter Classic</p>
+                  </div>
+                  <div class="listing__body">
+                    <p class="listing__year">2018</p>
+                    <div class="listing__parameters">
+                      <span class="listing__motor">дизель</span>
+                      <span class="listing__volume">3.2 турбо</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="news__pagination pagination">
+                <li class="pagination__item">
+                  <a class="pagination__link" href="#">1</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link" href="#">2</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link" href="#">3</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link" href="#">4</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link" href="#">...</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link" href="#">99</a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Кнопка добавить катализатор -->
+            <div class="add-catalog">
+              <a class="add-catalog__link" href="#"
+                >Добавить катализатор в каталог</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <!-- SEO текст в каталоге -->
+        <section class="seo-catalog">
+          <div class="container">
+            <div class='seo__content'>{{ content.content|safe }}</div>
+          </div>
+        </section>
+      </main>
+{% endblock content %}
+
+{% block script %}
+  <script src="{% static 'main/js/select.js' %}"></script>
+{% endblock script %}

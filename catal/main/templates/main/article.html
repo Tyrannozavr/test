@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+      <main class="main">
+        <!-- Хлебные крошки -->
+        <div class="head-wrapper">
+          <section class="head">
+            <div class="container">
+              <nav class="breadcrumbs">
+                <ul class="breadcrumbs__items">
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'home' %}">Главная</a>
+                  </li>
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'blog' %}">Блог</a>
+                  </li>
+                </ul>
+              </nav>
+              <h1 class="head__title h1">
+                {{post.header}}
+              </h1>
+              <div class="news__bottom">
+                <span class="news__date--color">{{ post.date|date:'d.m.y'}}</span>
+                <span class="news__views--color">1254</span>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Статья -->
+        <section class="article">
+          <div class="container">
+            <!-- Тело статьи -->
+            <div class="article__body article__content">
+              {{ post.content|safe }}
+            </div>
+          </div>
+        </section>
+      </main>
+{% endblock content %}

@@ -1,0 +1,216 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+      <main class="main">
+        <!-- Хлебные крошки -->
+        <div class="head-wrapper">
+          <section class="head">
+            <div class="container">
+              <nav class="breadcrumbs">
+                <ul class="breadcrumbs__items">
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'home' %}">Главная</a>
+                  </li>
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'calculator' %}"
+                      >Калькулятор</a
+                    >
+                  </li>
+                </ul>
+              </nav>
+              <h1 class="head__title h1">
+                {{header_h1.header_h1}}
+              </h1>
+            </div>
+          </section>
+        </div>
+        {% for calc in calculator %}
+        <!-- Калькуляторы -->
+        <section class="calc">
+          <div class="container">
+            <div class="calc__wrapper">
+              <div class="calc__wrap">
+                <div class="calc__content">
+                  <p class="calc__text text">
+                    {{calc.sub_content}}
+                  </p>
+                </div>
+                <div class="calc__item wrap">
+                  <h4 class="calc__name">Рассчет стоимости</h4>
+                  <!-- Переключатель калькуляторов -->
+                  <form class="calc__checkbox" action="">
+                    <label class="checkbox-calc">
+                      <input type="checkbox" />
+                      <span
+                        class="checkbox-calc-switch"
+                        data-label-on="По автомобилю"
+                        data-label-off="По содержанию"
+                      ></span>
+                    </label>
+                  </form>
+
+                  <!-- Калькулятор по содержанию элементов -->
+                  <form class="form__item-modal form-element" action="">
+                    <input
+                      class="form__input-name form__input-name--margin"
+                      type="number"
+                      placeholder="Вес, кг"
+                    />
+                    <input
+                      class="form__input-name form__input-name--margin"
+                      type="number"
+                      placeholder="Pt (платина), гр"
+                    />
+                    <input
+                      class="form__input-name form__input-name--margin"
+                      type="number"
+                      placeholder="Pd (палладий), гр"
+                    />
+                    <input
+                      class="form__input-name form__input-name--margin form__input-name--marginbig"
+                      type="number"
+                      placeholder="Rh (родий), гр"
+                    />
+                    <div class="form__result result">
+                      <p class="result__subtitle">Цена за 1 кг</p>
+                      <output class="result__kg">121 245.23</output>
+                      <span class="kg">₽</span>
+                      <p class="result__subtitle">Стоимость катализатора</p>
+                      <output class="result__all">2 125.23</output>
+                      <span class="all">₽</span>
+                    </div>
+                    <button class="form__btn">Продать катализатор</button>
+                  </form>
+
+                  <!-- Калькулятор по марке автомобиля -->
+                  <form class="filter form__item-modal form-auto" action="">
+                    <div class="filter__item--calc">
+                      <!-- Контейнер селекта 1 -->
+                      <div class="customInputContainer1 filter__brand">
+                        <div class="customInput1">
+                          <div class="selectedData1">Марка авто</div>
+                          <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                        <div class="options1">
+                          <div class="searchInput1">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input
+                              type="text"
+                              id="searchInput1"
+                              placeholder="Search"
+                            />
+                          </div>
+                          <ul class="ul1"></ul>
+                        </div>
+                      </div>
+
+                      <!-- Контейнер селекта 2 -->
+                      <div class="customInputContainer2">
+                        <div class="customInput2">
+                          <div class="selectedData2">Модель</div>
+                          <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                        <div class="options2">
+                          <div class="searchInput2">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input
+                              type="text"
+                              id="searchInput2"
+                              placeholder="Search"
+                            />
+                          </div>
+                          <ul class="ul2"></ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="filter__item--calc">
+                      <!-- Контейнер селекта 3 -->
+                      <div class="customInputContainer3 filter__year">
+                        <div class="customInput3">
+                          <div class="selectedData3">Год выпуска</div>
+                          <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                        <div class="options3">
+                          <div class="searchInput3">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input
+                              type="text"
+                              id="searchInput3"
+                              placeholder="Search"
+                            />
+                          </div>
+                          <ul class="ul3"></ul>
+                        </div>
+                      </div>
+
+                      <!-- Контейнер селекта 4 -->
+                      <div class="customInputContainer4">
+                        <div class="customInput4">
+                          <div class="selectedData4">Тип двигателя</div>
+                          <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                        <div class="options4">
+                          <div class="searchInput4">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input
+                              type="text"
+                              id="searchInput4"
+                              placeholder="Search"
+                            />
+                          </div>
+                          <ul class="ul4"></ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="filter__item--margin">
+                      <!-- Контейнер селекта 5 -->
+                      <div class="customInputContainer5 filter__motor">
+                        <div class="customInput5">
+                          <div class="selectedData5">Объем двигателя</div>
+                          <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                        <div class="options5">
+                          <div class="searchInput5">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input
+                              type="text"
+                              id="searchInput5"
+                              placeholder="Search"
+                            />
+                          </div>
+                          <ul class="ul5"></ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form__result result">
+                      <p class="result__subtitle">
+                        Примерная стоимость катализатора
+                      </p>
+                      <output class="result__all">38 870.08</output>
+                      <span class="all">₽</span>
+                    </div>
+                    <button class="form__btn">Продать катализатор</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SEO текст -->
+        <section class="seo">
+          <div class="container">
+            <div class='seo__content'>
+              {{calc.content|safe}}
+            </div>
+          </div>
+        </section>
+
+        {% endfor %}
+      </main>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'main/js/select.js' %}"></script>
+{% endblock script %}

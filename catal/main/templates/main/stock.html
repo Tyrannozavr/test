@@ -1,0 +1,227 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+      <main class="main">
+        <!-- Хлебные крошки -->
+        <div class="head-wrapper">
+          <section class="head">
+            <div class="container">
+              <nav class="breadcrumbs">
+                <ul class="breadcrumbs__items">
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'home' %}">Главная</a>
+                  </li>
+                  <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{% url 'stock' %}">Биржа</a>
+                  </li>
+                </ul>
+              </nav>
+              <h1 class="head__title h1">{{header_h1.header_h1}}</h1>
+            </div>
+          </section>
+        </div>
+
+        <!-- Котировки -->
+        <section class="quotes">
+          <div class="container">
+            <!-- Котировки online -->
+            {% for s in stock %}
+            <div class="quotes__item">
+              <h2 class="quotes__title h2">{{s.online_header}}</h2>
+              <p class="quotes__text">
+                {{s.online_content}}
+              </p>
+              <!-- Кнопки переключатели -->
+              <form action="" class="quotes__form">
+                <label class="checkbox-item wrap">
+                  <input type="checkbox" />
+                  <span
+                    class="checkbox-item-switch"
+                    data-label-on="USD"
+                    data-label-off="RUB"
+                  ></span>
+                </label>
+                <label class="checkbox-item wrap">
+                  <input type="checkbox" />
+                  <span
+                    class="checkbox-item-switch"
+                    data-label-on="Ounce"
+                    data-label-off="Gram"
+                  ></span>
+                </label>
+              </form>
+
+              <!-- Таблица онлайн котировок -->
+              {% for on in online %}
+              <table class="quotes__online online">
+                <tr>
+                  <td class="online__head td-left td-lh">Update</td>
+                  <td class="online__head td-center">Bid</td>
+                  <td class="online__head td-center">Ask</td>
+                  <td class="online__head td-right td-rh">Change</td>
+                </tr>
+                <tr>
+                  <td class="online__pt td-flex td-left">
+                    <span>{{on.update|time:"H:i"}}</span>Platinum
+                  </td>
+                  <td class="online__pt td-center td-price">{{on.pt_price_bid}}</td>
+                  <td class="online__pt td-center td-price">{{on.pt_price_ask}}</td>
+                  <td class="online__pt td-flex td-right online-plus">
+                    <span>{{on.pt_change}}%</span>{{on.pt_change_num}}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="online__pd td-flex td-left">
+                    <span>{{on.update}}</span>Palladium
+                  </td>
+                  <td class="online__pd td-center td-price">{{on.pd_price_bid}}</td>
+                  <td class="online__pd td-center td-price">{{on.pd_price_ask}}</td>
+                  <td class="online__pd td-flex td-right online-minus">
+                    <span>{{on.pd_change}}%</span>{{on.pd_change_num}}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="online__rh td-flex td-left td-lb">
+                    <span>{{on.update}}</span>Rhodium
+                  </td>
+                  <td class="online__rh td-center td-price">{{on.rh_price_bid}}</td>
+                  <td class="online__rh td-center td-price">{{on.rh_price_ask}}</td>
+                  <td class="online__rh td-flex td-right online-plus td-rb">
+                    <span>{{on.rh_change}}%</span>+{{on.rh_change_num}}
+                  </td>
+                </tr>
+              </table>
+              {%endfor%}
+
+              <p class="table__subtitle">
+                Источник данных:
+                <a href="https://www.kitco.com/">https://www.kitco.com/</a>
+              </p>
+            </div>
+
+            <!-- Котировки offline -->
+            <div class="quotes__item">
+              <h2 class="quotes__title h2">{{ s.fix_header }}</h2>
+              <p class="quotes__text">
+                {{ s.fix_content }}
+              </p>
+
+              <!-- Таблица оффлайн котировок -->
+              {% for fix in fixprice %}
+              <table class="quotes__offline offline">
+                <tr>
+                  <td class="offline__head td-left td-lh" colspan="2">
+                    {{fix.fix_today_date}}
+                  </td>
+                  <td class="offline__head td-center">AM</td>
+                  <td class="offline__head td-center td-rh">PM</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt offline__element" rowspan="2">
+                    Platinum
+                  </td>
+                  <td class="offline__pt td-center offline__price">$</td>
+                  <td class="offline__pt td-center">{{fix.fix_today_pt_usd_am}}</td>
+                  <td class="offline__pt td-center">{{fix.fix_today_pt_usd_pm}}</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt td-center offline__price">&#8381;</td>
+                  <td class="offline__pt td-center">{{fix.fix_today_pt_rub_am}}</td>
+                  <td class="offline__pt td-center">{{fix.fix_today_pt_rub_am}}</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt td-lb offline__element" rowspan="2">
+                    Palladium
+                  </td>
+                  <td class="offline__pt td-center offline__price">$</td>
+                  <td class="offline__pt td-center">{{fix.fix_today_pd_usd_am}}</td>
+                  <td class="offline__pt td-center">{{fix.fix_today_pd_usd_pm}}</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt td-center offline__price">&#8381;</td>
+                  <td class="offline__pt td-center">{{fix.fix_today_pd_rub_am}}</td>
+                  <td class="offline__pt td-center td-rb">{{fix.fix_today_pd_rub_pm}}</td>
+                </tr>
+              </table>
+              <table class="quotes__offline offline">
+                <tr>
+                  <td class="offline__head td-left td-lh" colspan="2">
+                    {{fix.fix_1_date}}
+                  </td>
+                  <td class="offline__head td-center">AM</td>
+                  <td class="offline__head td-center td-rh">PM</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt offline__element" rowspan="2">
+                    Platinum
+                  </td>
+                  <td class="offline__pt td-center offline__price">$</td>
+                  <td class="offline__pt td-center">{{fix.fix_1_pt_usd_am}}</td>
+                  <td class="offline__pt td-center">{{fix.fix_1_pt_usd_pm}}</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt td-center offline__price">&#8381;</td>
+                  <td class="offline__pt td-center">{{fix.fix_1_pt_rub_am}}</td>
+                  <td class="offline__pt td-center">{{fix.fix_1_pt_rub_pm}}</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt td-lb offline__element" rowspan="2">
+                    Palladium
+                  </td>
+                  <td class="offline__pt td-center offline__price">$</td>
+                  <td class="offline__pt td-center">{{fix.fix_1_pd_usd_am}}</td>
+                  <td class="offline__pt td-center">{{fix.fix_1_pd_usd_pm}}</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt td-center offline__price">&#8381;</td>
+                  <td class="offline__pt td-center">{{fix.fix_1_pd_rub_am}}</td>
+                  <td class="offline__pt td-center td-rb">{{fix.fix_1_pd_rub_pm}}</td>
+                </tr>
+              </table>
+              <table class="quotes__offline offline">
+                <tr>
+                  <td class="offline__head td-left td-lh" colspan="2">
+                    {{fix.fix_2_date}}
+                  </td>
+                  <td class="offline__head td-center">AM</td>
+                  <td class="offline__head td-center td-rh">PM</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt offline__element" rowspan="2">
+                    Platinum
+                  </td>
+                  <td class="offline__pt td-center offline__price">$</td>
+                  <td class="offline__pt td-center">{{fix.fix_2_pt_usd_am}}</td>
+                  <td class="offline__pt td-center">{{fix.fix_2_pt_usd_pm}}</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt td-center offline__price">&#8381;</td>
+                  <td class="offline__pt td-center">{{fix.fix_2_pt_rub_am}}</td>
+                  <td class="offline__pt td-center">{{fix.fix_2_pt_rub_pm}}</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt td-lb offline__element" rowspan="2">
+                    Palladium
+                  </td>
+                  <td class="offline__pt td-center offline__price">$</td>
+                  <td class="offline__pt td-center">{{fix.fix_2_pd_usd_am}}</td>
+                  <td class="offline__pt td-center">{{fix.fix_2_pd_usd_pm}}</td>
+                </tr>
+                <tr>
+                  <td class="offline__pt td-center offline__price">&#8381;</td>
+                  <td class="offline__pt td-center">{{fix.fix_2_pd_rub_am}}</td>
+                  <td class="offline__pt td-center td-rb">{{fix.fix_2_pd_rub_pm}}</td>
+                </tr>
+              </table>
+              {% endfor %}
+              <p class="table__subtitle">
+                Источник данных:
+                <a href="https://www.kitco.com/">https://www.kitco.com/</a>
+              </p>
+            </div>
+            {{s.content}}
+            {% endfor %}
+          </div>
+        </section>
+      </main>
+{% endblock content %}
