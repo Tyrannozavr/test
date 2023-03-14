@@ -137,8 +137,8 @@ class TypeOfMotor(models.Model):
 class EngineVolume(models.Model):
     volume = models.FloatField(verbose_name='Объем двигателя')
 
-    def __str__(self):
-        return self.volume
+    # def __str__(self):
+    #     return self.volume
 
 # ГОДА ВЫПУСКА
 class YearRelease(models.Model):
