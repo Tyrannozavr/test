@@ -199,14 +199,14 @@ class Catalysts(models.Model):
         ('tr', 'грузовое авто'),
     )
     type_transport = models.CharField(max_length=2, choices=TYPE_OF_TRANSPORT, blank=True, default='cr', verbose_name='Тип автомобиля')
-    weight = models.FloatField(blank=True, help_text='Указывать в граммах', verbose_name='Вес катализатора')
-    quantity_pt = models.FloatField(blank=True, help_text='Указывать в граммах', verbose_name='Содержание платины')
-    quantity_pd = models.FloatField(blank=True, help_text='Указывать в граммах', verbose_name='Содержание палладия')
-    quantity_rh = models.FloatField(blank=True, help_text='Указывать в граммах', verbose_name='Содержание родия')
-    update = models.ForeignKey('FixPrice', on_delete=models.PROTECT, null=True, help_text='Автообновление', verbose_name='Дата обновления')
-    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, help_text='Автообновление раз в сутки', verbose_name='Цена катализатора на сегодня')
-    chart_price = models.TextField(max_length=3000, help_text='Не редактировать', verbose_name='Код графика изменения цены')
-    content = models.TextField(max_length=3000, help_text='Максимум 3000 символов', verbose_name='Описание катализатора')
+    weight = models.FloatField(blank=True, null=True, help_text='Указывать в граммах', verbose_name='Вес катализатора')
+    quantity_pt = models.FloatField(blank=True, null=True, help_text='Указывать в граммах', verbose_name='Содержание платины')
+    quantity_pd = models.FloatField(blank=True, null=True, help_text='Указывать в граммах', verbose_name='Содержание палладия')
+    quantity_rh = models.FloatField(blank=True, null=True, help_text='Указывать в граммах', verbose_name='Содержание родия')
+    update = models.ForeignKey('FixPrice', blank=True, on_delete=models.PROTECT, null=True, help_text='Автообновление', verbose_name='Дата обновления')
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text='Автообновление раз в сутки', verbose_name='Цена катализатора на сегодня')
+    chart_price = models.TextField(max_length=3000, blank=True, help_text='Не редактировать', verbose_name='Код графика изменения цены')
+    content = models.TextField(max_length=3000, blank=True, help_text='Максимум 3000 символов', verbose_name='Описание катализатора')
     
     def get_absolute_url(self):
         return reverse('catalyst', kwargs={'catalyst_slug': self.slug})
