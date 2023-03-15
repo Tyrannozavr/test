@@ -75,6 +75,22 @@ class PageCatalogAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'description', 'header_h1')
     form = PageCatalogAdminForm
 
+
+# МАРКИ АВТО
+@admin.register(BrandAuto)
+class BrandAutoAdmin(admin.ModelAdmin):
+    list_display = ('brand',)
+    list_display_links = ('brand',)
+
+
+# МОДЕЛИ АВТО
+@admin.register(ModelAuto)
+class ModelAutoAdmin(admin.ModelAdmin):
+    list_display = ('mark', 'model')
+    list_display_links = ('model',)
+
+
+
 # КАТАЛИЗАТОР
 @admin.register(Catalysts)
 class CatalystsAdmin(admin.ModelAdmin):

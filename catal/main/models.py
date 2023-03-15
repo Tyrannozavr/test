@@ -153,6 +153,10 @@ class BrandAuto(models.Model):
 
     def __str__(self):
         return self.brand
+    
+    class Meta:
+        verbose_name = 'марка авто'
+        verbose_name_plural = 'Марки авто'
 
 # МОДЕЛИ АВТО
 class ModelAuto(models.Model):
@@ -161,6 +165,10 @@ class ModelAuto(models.Model):
 
     def __str__(self):
         return self.model
+    
+    class Meta:
+        verbose_name = 'модель авто'
+        verbose_name_plural = 'Модели авто'
     
 
 # КАТАЛИЗАТОР
