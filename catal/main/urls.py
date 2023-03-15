@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path
 from .views import *
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     #path('catalog/', catalog, name='catalog'),
     path('catalog/', CatalogListView.as_view(), name='catalog'),
     path('catalog/brands/', brand_list, name='brands'),
-    path('catalog/marks/', marks_list, name='brands'),
+    path('catalog/marks_unsorted/', marks_list_unsorted, name='brands'),
+    path('catalog/marks_sorted/', marks_list_sorted, name='brands'),
     path('catalog/<slug:catalyst_slug>/', show_catalyst, name='catalyst'),
 ]

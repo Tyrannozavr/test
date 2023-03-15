@@ -14,14 +14,11 @@ window.addEventListener('click', (e) => {
 })
 
 
-// prepatation brands
+// preparation brands
 $.ajax('brands', {
-    dataType: 'json',
-    type: 'GET',
-    success: (res) => {
+    dataType: 'json', type: 'GET', success: (res) => {
         let array = res['list']
         getListOne(array);
-        querySelector();
     }
 })
 
@@ -33,7 +30,11 @@ function getListOne(array) {
         const countryName = document.createTextNode(country);
         li.appendChild(countryName);
         ul1.appendChild(li);
-}}
+    }
+    querySelector();
+
+}
+
 
 customInput1.addEventListener('click', () => {
     customInputContainer1.classList.toggle('show')
@@ -43,10 +44,8 @@ customInput1.addEventListener('click', () => {
 function querySelector() {
     ul1.querySelectorAll('li').forEach(li => {
         li.addEventListener('click', (e) => {
-            let selectdItem1 = e.target.innerText
-            selectedData1.innerText = selectdItem1
-            // console.log('click', selectdItem1);
-            updateListTwo(selectdItem1);
+            selectedData1.innerText = e.target.innerText
+            updateListTwo(selectedData1.innerText);
             for (const li of document.querySelectorAll("li.selected")) {
                 li.classList.remove("selected");
             }
@@ -57,6 +56,57 @@ function querySelector() {
 }
 
 
+// if you select brand it will change the list of marks
+function updateListTwo(element) {
+    let array = sorted_list[element]
+    getListTwo(array);
+}
+
+
+// preparation all marks
+$.ajax('marks_unsorted', {
+    dataType: 'json', type: 'GET', success: (res) => {
+        let listMarks = res['list']
+        getListTwo(listMarks);
+    }
+})
+
+function querySelectorTwo() {
+    ul2.querySelectorAll('li').forEach(li => {
+        li.addEventListener('click', (e) => {
+            selectedData2.innerText = e.target.innerText
+
+            for (const li of document.querySelectorAll("li.selected")) {
+                li.classList.remove("selected");
+            }
+            e.target.classList.add('selected')
+            customInputContainer2.classList.toggle('show')
+        })
+    });
+}
+
+let sorted_list = []
+// preparation marks for each brand
+$.ajax('marks_sorted', {
+    dataType: 'json', type: 'GET', success: (res) => {
+        sorted_list = res['list']
+    }
+})
+
+function getListTwo(array) {
+    while (ul2.firstChild) {
+        ul2.removeChild(ul2.firstChild);
+    }
+    let arrayLength = array.length
+    for (let i = 0; i < arrayLength; i++) {
+        let country = array[i]
+        const li = document.createElement("li");
+        const countryName = document.createTextNode(country);
+        li.appendChild(countryName);
+        ul2.appendChild(li);
+    }
+    querySelectorTwo();
+}
 
 searchInput1.addEventListener('keyup', (e) => {
     let searchedVal = searchInput1.value.toLowerCase()
@@ -71,34 +121,6 @@ searchInput1.addEventListener('keyup', (e) => {
 })
 
 
-// Preparation marks
-
-let dict = []
-$.ajax('marks', {
-    dataType: 'json',
-    type: 'GET',
-    success: (res) => {
-        dict = res['list']
-        let listTwoUnsort = flatten(dict)
-        getListTwo(listTwoUnsort);
-    }
-})
-
-function flatten(dict){
-    let answer = []
-    for (const [key, value] of Object.entries(dict))  {
-        for (let val of value) {
-            answer.push(val);
-        }
-    }
-    return answer
-}
-
-
-function  updateListTwo(element){
-    let list1 = dict[element]
-    getListTwo(list1);
-}
 // --------------------- Created By InCoder ---------------------
 let customInput2 = document.querySelector('.customInput2')
 selectedData2 = document.querySelector('.selectedData2')
@@ -117,62 +139,6 @@ window.addEventListener('click', (e) => {
 customInput2.addEventListener('click', () => {
     customInputContainer2.classList.toggle('show')
 })
-
-function getListTwo(array){
-    while (ul2.firstChild) {
-  ul2.removeChild(ul2.firstChild);
-}
-    let arrayLength = array.length
-    for (let i = 0; i < arrayLength; i++) {
-        let country = array[i]
-        const li = document.createElement("li");
-        const countryName = document.createTextNode(country);
-        li.appendChild(countryName);
-        ul2.appendChild(li);
-    }
-    querySelectorTwo();
-}
-
-
-// ul2.querySelectorAll('li').forEach(li => {
-//     li.addEventListener('click', (e) => {
-//         let selectdItem2 = e.target.innerText
-//         selectedData2.innerText = selectdItem2
-//
-//         for (const li of document.querySelectorAll("li.selected")) {
-//             li.classList.remove("selected");
-//         }
-//         e.target.classList.add('selected')
-//         customInputContainer2.classList.toggle('show')
-//     })
-// });
-
-function querySelectorTwo () {
-    ul2.querySelectorAll('li').forEach(li => {
-    li.addEventListener('click', (e) => {
-        let selectdItem2 = e.target.innerText
-        selectedData2.innerText = selectdItem2
-
-        for (const li of document.querySelectorAll("li.selected")) {
-            li.classList.remove("selected");
-        }
-        e.target.classList.add('selected')
-        customInputContainer2.classList.toggle('show')
-    })
-});
-}
-
-function updateData2(data) {
-    let selectedCountry = data.innerText
-    selectedData2.innerText = selectedCountry
-
-    for (const li of document.querySelectorAll("li.selected")) {
-        li.classList.remove("selected");
-    }
-    data.classList.add('selected')
-    customInputContainer2.classList.toggle('show')
-    console.log(selectedCountry);
-}
 
 searchInput2.addEventListener('keyup', (e) => {
     let searchedVal = searchInput2.value.toLowerCase()
