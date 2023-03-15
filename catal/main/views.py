@@ -187,5 +187,7 @@ def brand_list(request):
     return JsonResponse({'list': brands})
 
 def marks_list(request):
-    print('makrs')
-    return JsonResponse({'list': ['br', 'brr']})
+    brands = BrandAuto.objects.all().prefetch_related('modelauto_set')
+    marks = [{brand.brand: [mark.model for mark in brand.modelauto_set.all()]} for brand in brands]
+    return JsonResponse({'list': marks})
+
