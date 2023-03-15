@@ -17,17 +17,13 @@ $.ajax('brands', {
     dataType: 'json',
     type: 'GET',
     success: (res) => {
-        // console.log(res['list']);
-        // console.log(array1)
         let array1 = res['list']
-        console.log(array1)
-        get_list(array1);
+        get_list2(array1);
         querySelector();
     }
 })
 
-function get_list(array) {
-    console.log('get list');
+function get_list2(array) {
     arrayLength = array.length
     for (let i = 0; i < arrayLength; i++) {
         let country = array[i]
@@ -38,44 +34,14 @@ function get_list(array) {
 }}
 
 customInput1.addEventListener('click', () => {
-    console.log('hello');
     customInputContainer1.classList.toggle('show')
 })
 
 
-
-
-
-// var array1 = [
-//     "Custom Input",
-//     "Mali",
-//     "Vanuatu",
-//     "Venezuela",
-//     "Viet Nam",
-//     "Virgin Islands, British",
-//     "Virgin Islands, U.s.",
-//     "Wallis and Futuna",
-//     "Western Sahara",
-//     "Yemen",
-//     "Zambia",
-//     "Zimbabwe"
-// ];
-//
-//
-// let array1Length = array1.length
-//
-// for (let i = 0; i < array1Length; i++) {
-//     let country = array1[i]
-//     const li = document.createElement("li");
-//     const countryName = document.createTextNode(country);
-//     li.appendChild(countryName);
-//     ul1.appendChild(li);
-// }
 function querySelector() {
     console.log('selector');
 ul1.querySelectorAll('li').forEach(li => {
         li.addEventListener('click', (e) => {
-            console.log('elem')
             let selectdItem1 = e.target.innerText
             selectedData1.innerText = selectdItem1
 
@@ -89,17 +55,6 @@ ul1.querySelectorAll('li').forEach(li => {
 }
 
 
-function updateData1(data) {
-    let selectedCountry = data.innerText
-    selectedData1.innerText = selectedCountry
-
-    for (const li of document.querySelectorAll("li.selected")) {
-        li.classList.remove("selected");
-    }
-    data.classList.add('selected')
-    customInputContainer1.classList.toggle('show')
-    console.log(selectedCountry);
-}
 
 searchInput1.addEventListener('keyup', (e) => {
     let searchedVal = searchInput1.value.toLowerCase()
@@ -113,14 +68,16 @@ searchInput1.addEventListener('keyup', (e) => {
     ul1.innerHTML = searched_country ? searched_country : "<p style='margin-top: 1rem;'>Opps can't find any result <p style='margin-top: .2rem; font-size: .9rem;'>Try searching something else.</p></p>"
 })
 
-
-
-
-
-
-
-
-
+$.ajax('marks', {
+    dataType: 'json',
+    type: 'GET',
+    success: (res) => {
+        let array1 = res['list']
+        console.log(array1)
+        // get_list2(array1);
+        // querySelector();
+    }
+})
 
 
 

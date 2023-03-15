@@ -12,5 +12,6 @@ urlpatterns = [
     #path('catalog/', catalog, name='catalog'),
     path('catalog/', CatalogListView.as_view(), name='catalog'),
     path('catalog/brands/', brand_list, name='brands'),
+    path('catalog/marks/', marks_list, name='brands'),
     path('catalog/<slug:catalyst_slug>/', show_catalyst, name='catalyst'),
 ]

@@ -185,3 +185,7 @@ def brand_list(request):
     brands = [i[0] for i in brands]
     # print(brands, type(brands))
     return JsonResponse({'list': brands})
+
+def marks_list(request):
+    print('makrs')
+    return JsonResponse({'list': ['br', 'brr']})
