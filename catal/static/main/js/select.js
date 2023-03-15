@@ -12,6 +12,7 @@ window.addEventListener('click', (e) => {
         document.querySelector('.searchInput1').classList.remove('focus')
     }
 })
+
 $.ajax('brands', {
     dataType: 'json',
     type: 'GET',
@@ -19,9 +20,32 @@ $.ajax('brands', {
         // console.log(res['list']);
         // console.log(array1)
         let array1 = res['list']
-        get_list(array1)
+        console.log(array1)
+        get_list(array1);
+        querySelector();
     }
 })
+
+function get_list(array) {
+    console.log('get list');
+    arrayLength = array.length
+    for (let i = 0; i < arrayLength; i++) {
+        let country = array[i]
+        const li = document.createElement("li");
+        const countryName = document.createTextNode(country);
+        li.appendChild(countryName);
+        ul1.appendChild(li);
+}}
+
+customInput1.addEventListener('click', () => {
+    console.log('hello');
+    customInputContainer1.classList.toggle('show')
+})
+
+
+
+
+
 // var array1 = [
 //     "Custom Input",
 //     "Mali",
@@ -36,14 +60,10 @@ $.ajax('brands', {
 //     "Zambia",
 //     "Zimbabwe"
 // ];
-
-customInput1.addEventListener('click', () => {
-    console.log('hello');
-    customInputContainer1.classList.toggle('show')
-})
-
+//
+//
 // let array1Length = array1.length
-
+//
 // for (let i = 0; i < array1Length; i++) {
 //     let country = array1[i]
 //     const li = document.createElement("li");
@@ -51,29 +71,23 @@ customInput1.addEventListener('click', () => {
 //     li.appendChild(countryName);
 //     ul1.appendChild(li);
 // }
-function get_list(array) {
-    arrayLength = array.length
-for (let i = 0; i < arrayLength; i++) {
-    let country = array[i]
-    const li = document.createElement("li");
-    const countryName = document.createTextNode(country);
-    li.appendChild(countryName);
-    ul1.appendChild(li);
-}}
-
-
+function querySelector() {
+    console.log('selector');
 ul1.querySelectorAll('li').forEach(li => {
-    li.addEventListener('click', (e) => {
-        let selectdItem1 = e.target.innerText
-        selectedData1.innerText = selectdItem1
-        
-        for (const li of document.querySelectorAll("li.selected")) {
-            li.classList.remove("selected");
-        }
-        e.target.classList.add('selected')
-        customInputContainer1.classList.toggle('show')
-    })
-});
+        li.addEventListener('click', (e) => {
+            console.log('elem')
+            let selectdItem1 = e.target.innerText
+            selectedData1.innerText = selectdItem1
+
+            for (const li of document.querySelectorAll("li.selected")) {
+                li.classList.remove("selected");
+            }
+            e.target.classList.add('selected')
+            customInputContainer1.classList.toggle('show')
+        })
+    });
+}
+
 
 function updateData1(data) {
     let selectedCountry = data.innerText
