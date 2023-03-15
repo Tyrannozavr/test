@@ -13,17 +13,19 @@ window.addEventListener('click', (e) => {
     }
 })
 
+
+// prepatation brands
 $.ajax('brands', {
     dataType: 'json',
     type: 'GET',
     success: (res) => {
-        let array1 = res['list']
-        get_list2(array1);
+        let array = res['list']
+        getListOne(array);
         querySelector();
     }
 })
 
-function get_list2(array) {
+function getListOne(array) {
     arrayLength = array.length
     for (let i = 0; i < arrayLength; i++) {
         let country = array[i]
@@ -39,12 +41,12 @@ customInput1.addEventListener('click', () => {
 
 
 function querySelector() {
-    console.log('selector');
-ul1.querySelectorAll('li').forEach(li => {
+    ul1.querySelectorAll('li').forEach(li => {
         li.addEventListener('click', (e) => {
             let selectdItem1 = e.target.innerText
             selectedData1.innerText = selectdItem1
-
+            // console.log('click', selectdItem1);
+            updateListTwo(selectdItem1);
             for (const li of document.querySelectorAll("li.selected")) {
                 li.classList.remove("selected");
             }
@@ -68,19 +70,35 @@ searchInput1.addEventListener('keyup', (e) => {
     ul1.innerHTML = searched_country ? searched_country : "<p style='margin-top: 1rem;'>Opps can't find any result <p style='margin-top: .2rem; font-size: .9rem;'>Try searching something else.</p></p>"
 })
 
+
+// Preparation marks
+
+let dict = []
 $.ajax('marks', {
     dataType: 'json',
     type: 'GET',
     success: (res) => {
-        let array1 = res['list']
-        console.log(array1)
-        // get_list2(array1);
-        // querySelector();
+        dict = res['list']
+        let listTwoUnsort = flatten(dict)
+        getListTwo(listTwoUnsort);
     }
 })
 
+function flatten(dict){
+    let answer = []
+    for (const [key, value] of Object.entries(dict))  {
+        for (let val of value) {
+            answer.push(val);
+        }
+    }
+    return answer
+}
 
 
+function  updateListTwo(element){
+    let list1 = dict[element]
+    getListTwo(list1);
+}
 // --------------------- Created By InCoder ---------------------
 let customInput2 = document.querySelector('.customInput2')
 selectedData2 = document.querySelector('.selectedData2')
@@ -96,41 +114,45 @@ window.addEventListener('click', (e) => {
     }
 })
 
-var array2 = [
-    "Custom Input",
-    "Mali",
-    "Vanuatu",
-    "Venezuela",
-    "Viet Nam",
-    "Virgin Islands, British",
-    "Virgin Islands, U.s.",
-    "Wallis and Futuna",
-    "Western Sahara",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe"
-];
-
 customInput2.addEventListener('click', () => {
     customInputContainer2.classList.toggle('show')
 })
 
-let array2Length = array2.length
-
-for (let i = 0; i < array2Length; i++) {
-    let country = array2[i]
-    const li = document.createElement("li");
-    const countryName = document.createTextNode(country);
-    li.appendChild(countryName);
-    ul2.appendChild(li);
+function getListTwo(array){
+    while (ul2.firstChild) {
+  ul2.removeChild(ul2.firstChild);
+}
+    let arrayLength = array.length
+    for (let i = 0; i < arrayLength; i++) {
+        let country = array[i]
+        const li = document.createElement("li");
+        const countryName = document.createTextNode(country);
+        li.appendChild(countryName);
+        ul2.appendChild(li);
+    }
+    querySelectorTwo();
 }
 
 
-ul2.querySelectorAll('li').forEach(li => {
+// ul2.querySelectorAll('li').forEach(li => {
+//     li.addEventListener('click', (e) => {
+//         let selectdItem2 = e.target.innerText
+//         selectedData2.innerText = selectdItem2
+//
+//         for (const li of document.querySelectorAll("li.selected")) {
+//             li.classList.remove("selected");
+//         }
+//         e.target.classList.add('selected')
+//         customInputContainer2.classList.toggle('show')
+//     })
+// });
+
+function querySelectorTwo () {
+    ul2.querySelectorAll('li').forEach(li => {
     li.addEventListener('click', (e) => {
         let selectdItem2 = e.target.innerText
         selectedData2.innerText = selectdItem2
-        
+
         for (const li of document.querySelectorAll("li.selected")) {
             li.classList.remove("selected");
         }
@@ -138,6 +160,7 @@ ul2.querySelectorAll('li').forEach(li => {
         customInputContainer2.classList.toggle('show')
     })
 });
+}
 
 function updateData2(data) {
     let selectedCountry = data.innerText
