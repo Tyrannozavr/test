@@ -11,5 +11,10 @@ urlpatterns = [
     path('calculator/', calculator, name='calculator'),
     #path('catalog/', catalog, name='catalog'),
     path('catalog/', CatalogListView.as_view(), name='catalog'),
+
+    # URL для фильтра в каталоге
+    path('catalog/brands/', brand_list, name='brands'),
+    path('catalog/marks/', marks_list, name='brands'),
+    
     path('catalog/<slug:catalyst_slug>/', show_catalyst, name='catalyst'),
 ]

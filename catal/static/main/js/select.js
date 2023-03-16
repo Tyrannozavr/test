@@ -13,60 +13,51 @@ window.addEventListener('click', (e) => {
     }
 })
 
-var array1 = [
-    "Custom Input",
-    "Mali",
-    "Vanuatu",
-    "Venezuela",
-    "Viet Nam",
-    "Virgin Islands, British",
-    "Virgin Islands, U.s.",
-    "Wallis and Futuna",
-    "Western Sahara",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe"
-];
+
+// prepatation brands
+$.ajax('brands', {
+    dataType: 'json',
+    type: 'GET',
+    success: (res) => {
+        let array = res['list']
+        getListOne(array);
+        querySelector();
+    }
+})
+
+function getListOne(array) {
+    arrayLength = array.length
+    for (let i = 0; i < arrayLength; i++) {
+        let country = array[i]
+        const li = document.createElement("li");
+        const countryName = document.createTextNode(country);
+        li.appendChild(countryName);
+        ul1.appendChild(li);
+    }
+}
 
 customInput1.addEventListener('click', () => {
     customInputContainer1.classList.toggle('show')
 })
 
-let array1Length = array1.length
 
-for (let i = 0; i < array1Length; i++) {
-    let country = array1[i]
-    const li = document.createElement("li");
-    const countryName = document.createTextNode(country);
-    li.appendChild(countryName);
-    ul1.appendChild(li);
+function querySelector() {
+    ul1.querySelectorAll('li').forEach(li => {
+        li.addEventListener('click', (e) => {
+            let selectdItem1 = e.target.innerText
+            selectedData1.innerText = selectdItem1
+            // console.log('click', selectdItem1);
+            updateListTwo(selectdItem1);
+            for (const li of document.querySelectorAll("li.selected")) {
+                li.classList.remove("selected");
+            }
+            e.target.classList.add('selected')
+            customInputContainer1.classList.toggle('show')
+        })
+    });
 }
 
 
-ul1.querySelectorAll('li').forEach(li => {
-    li.addEventListener('click', (e) => {
-        let selectdItem1 = e.target.innerText
-        selectedData1.innerText = selectdItem1
-        
-        for (const li of document.querySelectorAll("li.selected")) {
-            li.classList.remove("selected");
-        }
-        e.target.classList.add('selected')
-        customInputContainer1.classList.toggle('show')
-    })
-});
-
-function updateData1(data) {
-    let selectedCountry = data.innerText
-    selectedData1.innerText = selectedCountry
-
-    for (const li of document.querySelectorAll("li.selected")) {
-        li.classList.remove("selected");
-    }
-    data.classList.add('selected')
-    customInputContainer1.classList.toggle('show')
-    console.log(selectedCountry);
-}
 
 searchInput1.addEventListener('keyup', (e) => {
     let searchedVal = searchInput1.value.toLowerCase()
@@ -81,11 +72,34 @@ searchInput1.addEventListener('keyup', (e) => {
 })
 
 
+// Preparation marks
+
+let dict = []
+$.ajax('marks', {
+    dataType: 'json',
+    type: 'GET',
+    success: (res) => {
+        dict = res['list']
+        let listTwoUnsort = flatten(dict)
+        getListTwo(listTwoUnsort);
+    }
+})
+
+function flatten(dict) {
+    let answer = []
+    for (const [key, value] of Object.entries(dict)) {
+        for (let val of value) {
+            answer.push(val);
+        }
+    }
+    return answer
+}
 
 
-
-
-
+function updateListTwo(element) {
+    let list1 = dict[element]
+    getListTwo(list1);
+}
 
 
 
@@ -106,48 +120,53 @@ window.addEventListener('click', (e) => {
     }
 })
 
-var array2 = [
-    "Custom Input",
-    "Mali",
-    "Vanuatu",
-    "Venezuela",
-    "Viet Nam",
-    "Virgin Islands, British",
-    "Virgin Islands, U.s.",
-    "Wallis and Futuna",
-    "Western Sahara",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe"
-];
-
 customInput2.addEventListener('click', () => {
     customInputContainer2.classList.toggle('show')
 })
 
-let array2Length = array2.length
-
-for (let i = 0; i < array2Length; i++) {
-    let country = array2[i]
-    const li = document.createElement("li");
-    const countryName = document.createTextNode(country);
-    li.appendChild(countryName);
-    ul2.appendChild(li);
+function getListTwo(array) {
+    while (ul2.firstChild) {
+        ul2.removeChild(ul2.firstChild);
+    }
+    let arrayLength = array.length
+    for (let i = 0; i < arrayLength; i++) {
+        let country = array[i]
+        const li = document.createElement("li");
+        const countryName = document.createTextNode(country);
+        li.appendChild(countryName);
+        ul2.appendChild(li);
+    }
+    querySelectorTwo();
 }
 
 
-ul2.querySelectorAll('li').forEach(li => {
-    li.addEventListener('click', (e) => {
-        let selectdItem2 = e.target.innerText
-        selectedData2.innerText = selectdItem2
-        
-        for (const li of document.querySelectorAll("li.selected")) {
-            li.classList.remove("selected");
-        }
-        e.target.classList.add('selected')
-        customInputContainer2.classList.toggle('show')
-    })
-});
+// ul2.querySelectorAll('li').forEach(li => {
+//     li.addEventListener('click', (e) => {
+//         let selectdItem2 = e.target.innerText
+//         selectedData2.innerText = selectdItem2
+//
+//         for (const li of document.querySelectorAll("li.selected")) {
+//             li.classList.remove("selected");
+//         }
+//         e.target.classList.add('selected')
+//         customInputContainer2.classList.toggle('show')
+//     })
+// });
+
+function querySelectorTwo() {
+    ul2.querySelectorAll('li').forEach(li => {
+        li.addEventListener('click', (e) => {
+            let selectdItem2 = e.target.innerText
+            selectedData2.innerText = selectdItem2
+
+            for (const li of document.querySelectorAll("li.selected")) {
+                li.classList.remove("selected");
+            }
+            e.target.classList.add('selected')
+            customInputContainer2.classList.toggle('show')
+        })
+    });
+}
 
 function updateData2(data) {
     let selectedCountry = data.innerText

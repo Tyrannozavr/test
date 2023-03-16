@@ -75,22 +75,6 @@ class PageCatalogAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'description', 'header_h1')
     form = PageCatalogAdminForm
 
-
-# МАРКИ АВТО
-@admin.register(BrandAuto)
-class BrandAutoAdmin(admin.ModelAdmin):
-    list_display = ('brand',)
-    list_display_links = ('brand',)
-
-
-# МОДЕЛИ АВТО
-@admin.register(ModelAuto)
-class ModelAutoAdmin(admin.ModelAdmin):
-    list_display = ('mark', 'model')
-    list_display_links = ('model',)
-
-
-
 # КАТАЛИЗАТОР
 @admin.register(Catalysts)
 class CatalystsAdmin(admin.ModelAdmin):
@@ -218,6 +202,15 @@ class CityAdmin(admin.ModelAdmin):
         return mark_safe(f'<img src={obj.manager_photo.url} width="50" height="50"')
     
     get_image.short_description = 'Фото'
+
+
+@admin.register(BrandAuto)
+class BrandAutoAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(ModelAuto)
+class ModelAutoAdmin(admin.ModelAdmin):
+    pass
 
 
 

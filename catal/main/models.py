@@ -153,22 +153,23 @@ class BrandAuto(models.Model):
 
     def __str__(self):
         return self.brand
-    
+
     class Meta:
-        verbose_name = 'марка авто'
-        verbose_name_plural = 'Марки авто'
+        verbose_name = 'Брэнд'
+        verbose_name_plural = 'Брэнды'
 
 # МОДЕЛИ АВТО
 class ModelAuto(models.Model):
-    mark = models.ForeignKey('BrandAuto', null=True, on_delete=models.PROTECT)
+    mark = models.ForeignKey(BrandAuto, on_delete=models.PROTECT)
     model = models.CharField(max_length=50, verbose_name='Модель')
 
     def __str__(self):
         return self.model
-    
+
     class Meta:
-        verbose_name = 'модель авто'
-        verbose_name_plural = 'Модели авто'
+        verbose_name = 'Модели'
+        verbose_name_plural = 'Модели'
+
     
 
 # КАТАЛИЗАТОР

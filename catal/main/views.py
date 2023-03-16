@@ -1,10 +1,11 @@
-from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.http import HttpResponse, HttpResponseNotFound, Http404, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.views.generic.list import ListView
 # from django.views.generic.detail import DetailView
 from django.views.generic import *
 from .models import *
 from django.core.paginator import Paginator
+from time import time
 
 
 
@@ -28,8 +29,6 @@ def home(request):
 
 
 
-
-
 class PageCatalogMeta:
     def get_catalog_meta(self):
         context = {
@@ -48,9 +47,25 @@ class CatalogListView(PageCatalogMeta, ListView):
     model = Catalysts
     template_name = 'main/catalog.html'
     context = 'context'
+    extra_context = {'now': time()}
+
+
+
+# брэнды для поиска
+def brand_list(request):
+    brands = BrandAuto.objects.all().values_list('brand')
+    brands = [i[0] for i in brands]
+    # print(brands, type(brands))
+    return JsonResponse({'list': brands})
+
+def marks_list(request):
+    brands = BrandAuto.objects.all().prefetch_related('modelauto_set')
+    marks = {brand.brand: [mark.model for mark in brand.modelauto_set.all()] for brand in brands}
+    # print(marks)
+    return JsonResponse({'list': marks})
+
 
 # class CatalogView(PageCatalogMeta, View):
-
 #     def get(self, request):
 #         title = PageCatalog.objects.get(pk=1)
 #         description = PageCatalog.objects.get(pk=1)
@@ -64,17 +79,10 @@ class CatalogListView(PageCatalogMeta, ListView):
 #             'content': content,
 #             'catalog_list': catalysts
 #             })
-    
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
     #     context['page'] = PageCatalog.objects.all()
     #     return context
-
-
-
-
-
-
 
 
 
@@ -103,6 +111,7 @@ def calculator(request):
 
 
 
+
 # СТРАНИЦА - БИРЖА
 def stock(request):
     context = {
@@ -117,6 +126,7 @@ def stock(request):
 
 
 
+
 # СТРАНИЦА - ЦЕНЫ
 def price(request):
     context = {
@@ -127,6 +137,8 @@ def price(request):
         'pricetable': PriceTable.objects.all(), 
     }
     return render(request, 'main/price.html', context=context)
+
+
 
 
 # СТРАНИЦА - БЛОГ
@@ -143,9 +155,6 @@ def blog(request):
     }
     return render(request, 'main/blog.html', context=context)
 
-
-
-
 # СТАТЬЯ
 def show_post(request, post_slug):
     post = get_object_or_404(Article, slug=post_slug)
@@ -158,6 +167,7 @@ def show_post(request, post_slug):
         'description': post.description,
     }
     return render(request, 'main/article.html', context=context)
+
 
 
 
