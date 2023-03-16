@@ -186,15 +186,11 @@ def brand_list(request):
     return JsonResponse({'list': brands})
 
 def marks_list_unsorted(request):
-    brands = BrandAuto.objects.all()
-    # marks = {brand.brand: [mark.model for mark in brand.modelauto_set.all()] for brand in brands}
     marks = [str(i.model) for i in ModelAuto.objects.all()]
-    print(marks)
     return JsonResponse({'list': marks})
 
 def marks_list_sorted(request):
     brands = BrandAuto.objects.all()
     marks = {brand.brand: [mark.model for mark in brand.modelauto_set.all()] for brand in brands}
-    print()
     return JsonResponse({'list': marks})
 
